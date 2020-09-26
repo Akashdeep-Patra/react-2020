@@ -3,29 +3,19 @@ import "./style.css";
 
 export default class App extends React.Component {
   constructor() {
-    this.monsters = [
-      {
-        name: "Dracula"
-      },
-      {
-        name: "FrankenStien"
-      },
-      {
-        name: "Mummy"
-      },
-      {
-        name: "Zombie"
-      },
-      {
-        name: "Warewolf"
-      }
-    ];
+    this.monsters = [{ name: "akash", id: 1 }];
   }
+  componentDidMount() {}
   render() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then(data => this.setState({ monsters: data }));
+
     return (
       <div className="App">
-        {this.monsters.map((monster,key) =>{ return  <h1 key={key}>{monster.name}</h1>})}
-        <h1>Hello world</h1>
+        {this.monsters.map(monster => {
+          return <h1 key={monster.id}>{monster.name}</h1>;
+        })}
       </div>
     );
   }
